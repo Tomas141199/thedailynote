@@ -1,11 +1,20 @@
 import Head from "next/head";
 import Image from "next/image";
+import hero from "./img/hero.jpg"
 import styles from "../styles/Home.module.css";
+
+import Navbar from "./components/ui/Navbar";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <div className="text-2xl text-black text-center animate-bounce 1s infinity">
+    <div>
+      <Navbar/>
+      <img
+        src={hero}
+        width="hero"
+      />
+
+      <div className="mt-6 text-2xl text-black text-center animate-bounce 1s infinity">
         Hola
       </div>
       <Head>
