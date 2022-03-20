@@ -8,7 +8,7 @@ export default function Home() {
     <div>
       <img
         src="/img/hero.jpg"
-        className="w-screen max-h-96 relative object-cover object-top"
+        className="w-screen height60 relative object-cover object-top"
       />
       <Navbar />
 
