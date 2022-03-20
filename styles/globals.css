@@ -1,13 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
+html {
   box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
   padding: 0;
   margin: 0;
 }
 
+
+body {
+  font-family: "Raleway", sans-serif;
+  @apply text-sm;
+}
+
+.floating-input > input::placeholder {
+  color: transparent;
+}
+
+.floating-input > input:focus ~ label,
+.floating-input > input:not(:placeholder-shown) ~ label {
+  @apply opacity-75 scale-75 -translate-y-8 -translate-x-2;
+  @apply text-light-blue;
+}
+
 .imagen-registro-div {
   background-image: url("../public/registro-img.png");
+
 }

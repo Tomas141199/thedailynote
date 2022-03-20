@@ -45,6 +45,7 @@ const Login = () => {
         const token = credential.accessToken;
         // La informacion del usuario logueado
         const user = result.user;
+
         localStorage.setItem("usuario", JSON.stringify(user));
       })
       .catch((error) => {
