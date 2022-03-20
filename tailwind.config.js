@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        tiny: ".6rem",
+      },
       colors: {
         "primary-blue": "#090B0D",
         "light-blue": "#0597F2",
@@ -13,7 +16,7 @@ module.exports = {
         "primary-gray": "#575654",
       },
       spacing: {
-        128: "30rem",
+        128: "32rem",
         tiny: "0.11rem",
       },
     },
