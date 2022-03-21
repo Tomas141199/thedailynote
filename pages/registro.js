@@ -5,8 +5,38 @@ import Link from "next/link";
 import ButtonForm from "./../components/ButtonForm";
 import Field from "./../components/Field";
 import { registroSchema, registroValues } from "./../validation/registroSchema";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
+import fire from "./../firebase/index";
+import { errorNotify } from "./../helpers/notify";
+import Router from "next/router";
 
 const Registro = () => {
+  //Funcion para registar al usuario con email y password
+  const registrarNuevoUsuario = async (values) => {
+    const { nombre, appaterno, email, password } = values;
+    try {
+      //Registro del nuevo usuario
+      await createUserWithEmailAndPassword(fire.auth, email, password);
+      //Envia el correo de verificacion
+      await sendEmailVerification(fire.auth.currentUser);
+
+      //Actualiza el nombre del usuario
+      await updateProfile(fire.auth.currentUser, {
+        displayName: `${nombre} ${appaterno}`,
+      });
+
+      Router.push("/login");
+
+      //Fin de la operacion
+    } catch (error) {
+      errorNotify(error.code);
+    }
+  };
+
   return (
     <div className="overflow-x-hidden h-screen w-full flex flex-col-reverse sm:flex-row  items-center bg-light-gray drop-shadow-lg">
       {/* Alertas por notificacion */}
@@ -27,7 +57,7 @@ const Registro = () => {
           <Formik
             initialValues={registroValues}
             validationSchema={registroSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={registrarNuevoUsuario}
           >
             <Form className="mt-12">
               <Field name="nombre" label="Nombre" />
