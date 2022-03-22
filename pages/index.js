@@ -1,9 +1,9 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import Navbar from "./components/ui/Navbar";
 
 export default function Home() {
+
+  
+
   return (
     <div>
       <img
@@ -15,6 +15,9 @@ export default function Home() {
       <div className="mt-6 text-2xl text-black text-center animate-bounce 1s infinity">
         Hola
       </div>
+
+      
+        
     </div>
   );
 }
