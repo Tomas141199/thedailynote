@@ -18,3 +18,8 @@ body {
   @apply opacity-75 scale-75 -translate-y-8 -translate-x-2;
   @apply text-light-blue;
 }
+
+.height60
+{
+  max-height: 60vh;
+}
