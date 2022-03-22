@@ -2,32 +2,64 @@ import Image from "next/image";
 import Link from "next/link";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import fire from "./../firebase/fire";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import Field from "./../components/Field";
 import ButtonForm from "./../components/ButtonForm";
 import { loginSchema, loginValues } from "./../validation/loginSchema";
 import { errorNotify } from "./../helpers/notify";
+import Router from "next/router";
+
+//Configuracion de idioma de mensajes
 
 const Login = () => {
   //Funcion para que usuario inicie sesion con su cuenta de google
-  async function iniciarSesionConGoogle() {
+  const iniciarSesionConGoogle = () => {
     signInWithPopup(fire.auth, fire.provider)
       .then((result) => {
         //Arroja el token de acceso a la cuenta, esto es para acceder a la API de google
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
         // La informacion del usuario logueado
         const user = result.user;
+        const token = credential.accessToken;
 
         localStorage.setItem("usuario", JSON.stringify(user));
+
+        //Regresar al usuario al inicio de la pagina
+        Router.push("/");
       })
       .catch((error) => {
-        // Manejo de errores
-        errorNotify("Algo salio mal intente de nuevo");
+        errorNotify(error.code);
       });
-  }
+  };
+
+  //Funcion para iniciar sesion con Email y Contrasenia
+  const iniciarSesionConEmailandPassword = (values) => {
+    //Obtencion de los campos de formik
+    const { email, password } = values;
+    //Inicio de sesion con los parametros
+    signInWithEmailAndPassword(fire.auth, email, password)
+      .then((userCredential) => {
+        // Se autentico correctamente
+        const user = userCredential.user;
+
+        //Verifica que el correo se ha verificado
+        if (user.emailVerified) {
+          localStorage.setItem("usuario", JSON.stringify(user));
+          //Regresar al usuario al inicio de la pagina
+          Router.push("/");
+        } else {
+          errorNotify("El correo no se ha verificado, revisa tu correo");
+        }
+      })
+      .catch((error) => {
+        errorNotify(error.code);
+      });
+  };
 
   return (
     <div className="overflow-x-hidden h-screen w-full flex flex-col sm:flex-row  items-center bg-light-gray drop-shadow-lg">
@@ -35,7 +67,7 @@ const Login = () => {
       <ToastContainer />
 
       {/* Imagen lado izquierdo */}
-      <div className="h-1/4 w-full sm:h-full sm:w-2/3 sm:rounded-l bg-[url('/images/login-bg1.jpg')] sm:bg-[url('/images/login-bg3.jpg')] bg-cover bg-center brightness-50"></div>
+      <div className="h-1/4 w-full sm:h-full sm:w-2/3 bg-[url('/images/login-bg1.jpg')] sm:bg-[url('/images/login-bg3.jpg')] bg-cover bg-center brightness-50"></div>
 
       {/* Formulario */}
       <div className="h-full w-full sm:h-full sm:w-1/3 bg-white rounded-r p-4">
@@ -61,7 +93,7 @@ const Login = () => {
           <Formik
             initialValues={loginValues}
             validationSchema={loginSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={iniciarSesionConEmailandPassword}
           >
             <Form className="mt-12">
               <Field name="email" type="email" label="Correo electronico" />
