@@ -1,7 +1,8 @@
+import { useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Form, Formik } from "formik";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import fire from "./../firebase/fire";
 import {
   signInWithEmailAndPassword,
@@ -11,12 +12,20 @@ import {
 import Field from "./../components/Field";
 import ButtonForm from "./../components/ButtonForm";
 import { loginSchema, loginValues } from "./../validation/loginSchema";
-import { errorNotify } from "./../helpers/notify";
+import { errorNotify, infoNotify } from "./../helpers/notify";
 import Router from "next/router";
-
-//Configuracion de idioma de mensajes
+import NotificacionContext from "./../context/notificaciones/notificacionContext";
 
 const Login = () => {
+  //Context de las notificaciones
+  const { notificacion } = useContext(NotificacionContext);
+
+  useEffect(() => {
+    if (notificacion) {
+      infoNotify(notificacion.mensaje);
+    }
+  }, []);
+
   //Funcion para que usuario inicie sesion con su cuenta de google
   const iniciarSesionConGoogle = () => {
     signInWithPopup(fire.auth, fire.provider)
@@ -27,6 +36,7 @@ const Login = () => {
         const user = result.user;
         const token = credential.accessToken;
 
+        //Guarda la sesion del usuario
         localStorage.setItem("usuario", JSON.stringify(user));
 
         //Regresar al usuario al inicio de la pagina
@@ -62,15 +72,26 @@ const Login = () => {
   };
 
   return (
-    <div className="overflow-x-hidden h-screen w-full flex flex-col sm:flex-row  items-center bg-light-gray drop-shadow-lg">
+    <div className="relative overflow-x-hidden h-screen w-full flex flex-col sm:flex-row  items-center bg-light-gray drop-shadow-lg">
       {/* Alertas por notificacion */}
       <ToastContainer />
 
       {/* Imagen lado izquierdo */}
-      <div className="h-1/4 w-full sm:h-full sm:w-2/3 bg-[url('/images/login-bg1.jpg')] sm:bg-[url('/images/login-bg3.jpg')] bg-cover bg-center brightness-50"></div>
+      <div className="relative h-1/4 w-full sm:h-full sm:w-2/3 bg-mask">
+        <div className="flex justify-center items-center sm:absolute sm:top-0 sm:left-12">
+          <Link href="/" passHref={true}>
+            <Image
+              src="/images/logo-escritorio.svg"
+              width="180px"
+              height="120px"
+              alt="logo escritorio"
+            />
+          </Link>
+        </div>
+      </div>
 
       {/* Formulario */}
-      <div className="h-full w-full sm:h-full sm:w-1/3 bg-white rounded-r p-4">
+      <div className="h-full w-full overflow-y-auto sm:h-full sm:w-1/3 bg-white rounded-r p-4">
         <div className="w-full sm:w-2/3 mx-auto">
           <h1 className="text-center font-bold text-2xl mt-12">
             Iniciar sesion

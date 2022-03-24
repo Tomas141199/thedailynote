@@ -1,4 +1,3 @@
-// import React from "react";
 import { ToastContainer } from "react-toastify";
 import { Form, Formik } from "formik";
 import Link from "next/link";
@@ -13,11 +12,15 @@ import {
 import fire from "./../firebase/index";
 import { errorNotify } from "./../helpers/notify";
 import Router from "next/router";
+import Image from "next/image";
+import { useContext } from "react";
+import NotificacionContext from "./../context/notificaciones/notificacionContext";
 
 const Registro = () => {
+  const { mostrarNotificacion } = useContext(NotificacionContext);
   //Funcion para registar al usuario con email y password
   const registrarNuevoUsuario = async (values) => {
-    const { nombre, appaterno, email, password } = values;
+    const { nombre, apellido, email, password } = values;
     try {
       //Registro del nuevo usuario
       await createUserWithEmailAndPassword(fire.auth, email, password);
@@ -26,11 +29,14 @@ const Registro = () => {
 
       //Actualiza el nombre del usuario
       await updateProfile(fire.auth.currentUser, {
-        displayName: `${nombre} ${appaterno}`,
+        displayName: `${nombre} ${apellido}`,
       });
 
-      Router.push("/login");
+      mostrarNotificacion(
+        "Registro exitoso!, revisa tu correo para confirmar tu cuenta"
+      );
 
+      Router.push("/login");
       //Fin de la operacion
     } catch (error) {
       errorNotify(error.code);
@@ -38,12 +44,12 @@ const Registro = () => {
   };
 
   return (
-    <div className="overflow-x-hidden h-screen w-full flex flex-col-reverse sm:flex-row  items-center bg-light-gray drop-shadow-lg">
+    <div className="overflow-x-hidden h-full sm:h-screen w-full flex flex-col-reverse sm:flex-row  items-center bg-light-gray drop-shadow-lg">
       {/* Alertas por notificacion */}
       <ToastContainer />
 
       {/*Contenedor del Formulario */}
-      <div className="w-full h-3/4 sm:h-full sm:w-1/3  bg-white rounded-r p-4">
+      <div className="w-full overflow-y-auto h-3/4 sm:h-full sm:w-1/3  bg-white rounded-r p-4">
         <div className="w-full sm:w-2/3 mx-auto">
           <h1 className="text-center font-bold text-2xl sm:mt-6">
             Registrate aqui
@@ -61,8 +67,7 @@ const Registro = () => {
           >
             <Form className="mt-12">
               <Field name="nombre" label="Nombre" />
-              <Field name="appaterno" label="Apellido Paterno" />
-              <Field name="apmaterno" label="Apellido Materno" />
+              <Field name="apellido" label="Apellidos" />
               <Field name="email" label="Correo electronico" />
               <Field name="password" label="Contraseña" />
               {/* Submit para enviar formulario */}
@@ -82,7 +87,18 @@ const Registro = () => {
       </div>
 
       {/* Imagen derecha */}
-      <div className="h-1/4 w-full sm:h-full sm:w-2/3 bg-[url('/images/login-bg1.jpg')] sm:bg-[url('/images/registro-img.png')] bg-cover brightness-75"></div>
+      <div className="relative h-1/4 w-full sm:h-full sm:w-2/3 bg-registro">
+        <div className="flex justify-center items-center sm:absolute sm:top-0 sm:right-12">
+          <Link href="/" passHref={true}>
+            <Image
+              src="/images/logo-escritorio.svg"
+              width="180px"
+              height="120px"
+              alt="logo escritorio"
+            />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

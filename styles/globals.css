@@ -9,6 +9,25 @@ body {
   @apply text-sm;
 }
 
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  background-color: #404d6242;
+  border-radius: 10px;
+}
+
+/* Input Styling */
+
 .floating-input > input::placeholder {
   color: transparent;
 }
@@ -19,7 +38,30 @@ body {
   @apply text-light-blue;
 }
 
-.height60
-{
+.height60 {
   max-height: 60vh;
+}
+
+/* Background */
+
+.bg-mask,
+.bg-registro {
+  background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
+    url("/images/login-bg1.jpg");
+  background-size: cover;
+}
+
+@media (min-width: 640px) {
+  .bg-mask {
+    background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
+      url("/images/login-bg3.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bg-registro {
+    background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
+      url("/images/registro-img.png");
+    background-size: cover;
+  }
 }
