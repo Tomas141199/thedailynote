@@ -1,8 +1,12 @@
 import "../styles/globals.css";
-import Registro from "./registro";
+import NotificacionState from "./../context/notificaciones/notificacionState";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <NotificacionState>
+      <Component {...pageProps} />
+    </NotificacionState>
+  );
 }
 
 export default MyApp;

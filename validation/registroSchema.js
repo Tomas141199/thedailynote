@@ -2,22 +2,20 @@ import * as Yup from "yup";
 
 export const registroSchema = () => {
   return Yup.object({
-    nombre: Yup.string().required("El nombre es obligatorio"),
-    appaterno: Yup.string().required("El Apellido Paterno es obligatorio"),
-    apmaterno: Yup.string().required("El Apellido Materno es obligatorio"),
+    nombre: Yup.string().required("El Nombre es obligatorio"),
+    apellido: Yup.string().required("El Apellido es obligatorio"),
     email: Yup.string()
-      .email("El email no es valido")
-      .required("El email es obligatorio"),
+      .email("El Email no es valido")
+      .required("El Email es obligatorio"),
     password: Yup.string()
-      .required("La contraseña es obligatorio")
-      .min(6, "La contraseña debe tener una longitud de 6"),
+      .required("La Contraseña es obligatorio")
+      .min(6, "La Contraseña debe tener una longitud de 6"),
   });
 };
 
 const registroValues = {
   nombre: "",
-  appaterno: "",
-  apmaterno: "",
+  apellido: "",
   email: "",
   password: "",
 };
