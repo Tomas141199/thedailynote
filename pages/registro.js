@@ -69,7 +69,7 @@ const Registro = () => {
               <Field name="nombre" label="Nombre" />
               <Field name="apellido" label="Apellidos" />
               <Field name="email" label="Correo electronico" />
-              <Field name="password" label="Contraseña" />
+              <Field name="password" type="password" label="Contraseña" />
               {/* Submit para enviar formulario */}
               <ButtonForm value="Registrar" />
             </Form>
