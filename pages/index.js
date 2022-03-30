@@ -1,17 +1,14 @@
-import Navbar from "../components/ui/Navbar";
+import { useContext } from "react";
+import AuthContext from "./../context/auth/authContext";
+import Layout from "./../components/Layout/Layout";
+import Hero from "./../components/Layout/Hero";
 
 export default function Home() {
+  const { usuario } = useContext(AuthContext);
   return (
-    <div className="overflow-x-hidden">
-      <img
-        src="/images/hero.jpg"
-        className="w-screen height60 relative object-cover object-top"
-      />
-      <Navbar />
-
-      <div className="mt-6 text-2xl text-black text-center animate-bounce 1s infinity">
-        Hola
-      </div>
-    </div>
+    <Layout inicio={true}>
+      <Hero />
+      <h1>Contenido de la pagina</h1>
+    </Layout>
   );
 }

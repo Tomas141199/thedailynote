@@ -38,12 +38,7 @@ body {
   @apply text-light-blue;
 }
 
-.height60 {
-  max-height: 60vh;
-}
-
 /* Background */
-
 .bg-mask,
 .bg-registro {
   background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
@@ -64,4 +59,17 @@ body {
       url("/images/registro-img.png");
     background-size: cover;
   }
+}
+
+/* Active states */
+.dropdown.true {
+  @apply scale-100 top-10;
+}
+
+.navbar.true {
+  @apply absolute w-full bg-opacity-blue top-0;
+}
+
+.navbar.false {
+  @apply bg-primary-blue;
 }

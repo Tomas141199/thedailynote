@@ -9,6 +9,7 @@ module.exports = {
         tiny: ".6rem",
       },
       colors: {
+        "opacity-blue": "#090b0da2 ",
         "primary-blue": "#090B0D",
         "light-blue": "#0597F2",
         "primary-red": "#F9250F",
@@ -16,8 +17,11 @@ module.exports = {
         "primary-gray": "#575654",
       },
       spacing: {
+        link: "2.4rem",
+        middle: "0.2rem",
         128: "32rem",
         tiny: "0.11rem",
+        small: "0.16rem",
       },
     },
   },

@@ -1,64 +1,49 @@
-const Navbar = () => {
-  const handledropdown = () => {
-    const dropdown = document.querySelector("#dropdown");
-    dropdown.classList.toggle("hidden");
-    dropdown.classList.toggle("flex");
-  };
+import Link from "next/link";
+import Image from "next/image";
+import AuthContext from "./../../context/auth/authContext";
+import { useContext } from "react";
+import UserCard from "./UserCard";
+
+const Navbar = ({ inicio }) => {
+  const { usuario } = useContext(AuthContext);
 
   return (
-    <div className="absolute top-0 right-0 w-full">
-      <nav className=" text-center md:flex md:items-center md:justify-between md:flex-wrap py-4 bg-slate-800 opacity-80">
-        <div className=" md:flex md:items-center">
-          <a href="/">
-            <img
-              className="mx-auto md:ml-3"
-              src="../images/logo-tdn.svg"
-              alt="logo tdn"
-              width="40"
+    <div className={`navbar ${inicio} h-16 flex items-center`}>
+      <div className="flex-1 flex justify-around items-center">
+        <Link href="/">
+          <a className="cursor-pointer">
+            <Image
+              blurDataURL="/images/logo-movil.svg"
+              src="/images/logo-nombre.svg"
+              width={200}
+              height={55}
+              alt="logo"
             />
           </a>
-        </div>
-        <div className="hidden md:block text-white text-2xl">
-          <p>The Daily Note</p>
-        </div>
-        <ul className=" md:flex md:items-center md:justify-around text-white mt-6 md:mr-2 md:mt-0">
-          <li className=" md:my-3 md:my-0">
-            <a href="#" className=" md:pr-4 hover:text-amber-300 ">
-              ¿Quienes somos?
-            </a>
-          </li>
-          <li className=" md:my-3 md:my-0">
-            <a href="/login" className="md:pr-4 hover:text-amber-300">
-              Login
-            </a>
-          </li>
-          <li className=" md:my-3 md:my-0">
-            <a href="/registro" className="md:pr-4 hover:text-amber-300">
-              Registro
-            </a>
-          </li>
-          <li className=" md:my-3 md:my-0 relative  flex flex-col items-center">
-            <a
-              href="#"
-              onClick={handledropdown}
-              className="md:pr-12 hover:text-amber-300"
-            >
-              Usuario
-            </a>
-            <div
-              id="dropdown"
-              className=" absolute md:right-2  mt-5 bg-slate-800 hidden flex-col  rounded mt-1 p-2 text-sm w-32"
-            >
-              <a href="#" className="px-1 py-1 hover:text-amber-300">
-                Perfil
-              </a>
-              <a href="#" className="px-1 py-1 hover:text-amber-300">
-                Cerrar sesión
-              </a>
-            </div>
-          </li>
-        </ul>
-      </nav>
+        </Link>
+        <nav>
+          <ul className="flex justify-between items-center gap-4 text-sm text-white">
+            <li className="relative after:absolute after:w-full after:h-middle after:bg-light-blue after:left-0 after:top-link after:scale-x-0 after:origin-left after:duration-500 hover:after:scale-x-100">
+              <Link href="#">¿Quíen somos?</Link>
+            </li>
+            <li className="relative after:absolute after:w-full after:h-middle after:bg-light-blue after:left-0 after:top-link after:scale-x-0 after:origin-left after:duration-500 hover:after:scale-x-100">
+              <Link href="#">Contacto</Link>
+            </li>
+            {!usuario ? (
+              <>
+                <li className="relative after:absolute after:w-full after:h-middle after:bg-light-blue after:left-0 after:top-link after:scale-x-0 after:origin-left after:duration-500 hover:after:scale-x-100">
+                  <Link href="/login">Entrar</Link>
+                </li>
+                <li className="relative after:absolute after:w-full after:h-middle after:bg-light-blue after:left-0 after:top-link after:scale-x-0 after:origin-left after:duration-500 hover:after:scale-x-100">
+                  <Link href="/registro">Registrarse</Link>
+                </li>
+              </>
+            ) : (
+              <UserCard usuario={usuario} />
+            )}
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import firebaseConfig from "./config";
 //firebaseAuth
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 //Firestore
-import { getFirestore, addDoc, collection } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 class Fire {
   constructor() {

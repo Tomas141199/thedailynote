@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Form, Formik } from "formik";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import fire from "./../firebase/fire";
 import {
   signInWithEmailAndPassword,
