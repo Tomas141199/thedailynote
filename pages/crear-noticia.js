@@ -10,6 +10,8 @@ import {
 import { useState } from "react";
 import Image from "next/image";
 import { RichTextBox } from "./../components/ui/RichTextBox";
+import Select from "./../components/Select";
+import GoogleMap from "../components/ui/GoogleMap";
 
 const CrearNoticia = () => {
   const [urlImagen, setUrlImagen] = useState(
@@ -34,10 +36,23 @@ const CrearNoticia = () => {
                   <Field name="cuerpo" label="Descripcion" />
                   <RichTextBox />
                   <Field name="fecha" label="Fecha del suceso" type="date" />
-                  <Field name="categoria" label="Categoria" type="select" />
+                  <Select name="categoria" label="Categoria">
+                    <option value="" disabled>
+                      Selecione una categoria
+                    </option>
+                    <option value="Local">Local</option>
+                    <option value="Deportes">Deportes</option>
+                    <option value="Sociales">Sociales</option>
+                    <option value="Espectaculos">Espectaculos</option>
+                    <option value="Internacional">Internacional</option>
+                    <option value="Politica">Politica</option>
+                    <option value="Comunidad BUAP">Comunidad BUAP</option>
+                  </Select>
                 </Form>
               </div>
               <div className="my-auto">
+                <ButtonForm value="Registrar" />
+
                 <div>
                   <Image
                     width={600}
@@ -60,10 +75,9 @@ const CrearNoticia = () => {
             </div>
 
             {/* Aqui va a ir el mapita c: */}
-            <Field name="ubicacion" label="Ubicacion" />
 
             {/* Submit para enviar formulario */}
-            <ButtonForm value="Registrar" />
+            <GoogleMap />
           </div>
         </Formik>
       </div>
