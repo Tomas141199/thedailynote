@@ -17,10 +17,11 @@ module.exports = {
         "primary-gray": "#575654",
       },
       spacing: {
-        link: "2.4rem",
+        link: "2.95rem",
         middle: "0.2rem",
         128: "32rem",
         tiny: "0.11rem",
+        "04": "0.35rem",
         small: "0.16rem",
       },
     },

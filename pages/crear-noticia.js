@@ -36,23 +36,10 @@ const CrearNoticia = () => {
                   <Field name="cuerpo" label="Descripcion" />
                   <RichTextBox />
                   <Field name="fecha" label="Fecha del suceso" type="date" />
-                  <Select name="categoria" label="Categoria">
-                    <option value="" disabled>
-                      Selecione una categoria
-                    </option>
-                    <option value="Local">Local</option>
-                    <option value="Deportes">Deportes</option>
-                    <option value="Sociales">Sociales</option>
-                    <option value="Espectaculos">Espectaculos</option>
-                    <option value="Internacional">Internacional</option>
-                    <option value="Politica">Politica</option>
-                    <option value="Comunidad BUAP">Comunidad BUAP</option>
-                  </Select>
+                  <Select name="categoria" label="Categoria" />
                 </Form>
               </div>
               <div className="my-auto">
-                <ButtonForm value="Registrar" />
-
                 <div>
                   <Image
                     width={600}
@@ -78,6 +65,7 @@ const CrearNoticia = () => {
 
             {/* Submit para enviar formulario */}
             <GoogleMap />
+            <ButtonForm value="Registrar" />
           </div>
         </Formik>
       </div>

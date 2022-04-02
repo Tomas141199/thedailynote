@@ -61,9 +61,34 @@ body {
   }
 }
 
+/* Burguer menu */
+
+.hamburguer .bar,
+.hamburguer:after,
+.hamburguer:before {
+  content: "";
+  @apply block w-full h-small bg-white rounded-full my-1 mx-0 duration-300;
+}
+
+.hamburguer.true .bar {
+  @apply opacity-0;
+}
+
+.hamburguer.true:after {
+  @apply rotate-45 -translate-x-1 -translate-y-04;
+}
+
+.hamburguer.true:before {
+  @apply -rotate-45 -translate-x-1 translate-y-2;
+}
+
 /* Active states */
+.arrow.true {
+  @apply rotate-180;
+}
+
 .dropdown.true {
-  @apply scale-100 top-10;
+  @apply scale-100 top-10 -left-8;
 }
 
 .navbar.true {
@@ -72,4 +97,24 @@ body {
 
 .navbar.false {
   @apply bg-primary-blue;
+}
+
+.navbar.sticky {
+  @apply fixed top-0 w-full bg-primary-blue;
+  animation: stickyDown 0.5s ease-in-out;
+}
+
+.navbar-mobile.true {
+  @apply left-0;
+}
+
+/* Animations  */
+@keyframes stickyDown {
+  from {
+    transform: translateY(-120px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }

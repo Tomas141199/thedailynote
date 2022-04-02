@@ -8,7 +8,10 @@ export default function Home() {
   return (
     <Layout inicio={true}>
       <Hero />
-      <h1>Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
     </Layout>
   );
 }
