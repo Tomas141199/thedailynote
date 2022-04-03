@@ -7,66 +7,97 @@ import {
   crearNoticiaSchema,
   crearNoticiaValues,
 } from "./../validation/crearNoticiaSchema";
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useContext } from "react";
 import { RichTextBox } from "./../components/ui/RichTextBox";
 import Select from "./../components/Select";
 import GoogleMap from "../components/ui/GoogleMap";
+import FileInput from "./../components/File";
+import { errorNotify } from "./../helpers/notify";
+import { ToastContainer } from "react-toastify";
+import fire from "./../firebase/fire";
+import Router from "next/router";
+import NotificacionContext from "./../context/notificaciones/notificacionContext";
 
-const CrearNoticia = () => {
-  const [urlImagen, setUrlImagen] = useState(
-    "https://images-ext-2.discordapp.net/external/p9vTDce_N9n7653rR_bH2RZ0nq_T4Qfvp85IYI1qSzw/https/mdbootstrap.com/img/Photos/Others/placeholder.jpg"
-  );
+const CrearNoticia = (values) => {
+  const { mostrarNotificacion } = useContext(NotificacionContext);
+  const [address, setAddress] = useState("");
+  const [mapCenter, setMapCenter] = useState({
+    lat: 19.0043346,
+    lng: -98.20169539999999,
+  });
+  const [urlImagen, setUrlImagen] = useState("/images/placeholder.jpg");
+
+  const crearNoticia = (values) => {
+    if (address === "") {
+      errorNotify("Agrega una ubicacion");
+      return;
+    }
+
+    if (urlImagen == "") {
+      errorNotify("Agrega una imagen");
+      return;
+    }
+
+    try {
+      fire.addNoticia({
+        ...values,
+        urlImagen,
+        address,
+        mapCenter,
+        createdAt: Date.now(),
+      });
+      mostrarNotificacion(
+        "Registro exitoso!, revisa tu correo para confirmar tu cuenta"
+      );
+
+      Router.push("/");
+      mostrarNotificacion(
+        "Creacion exitosa!, tu publicacion esta pendiente de revision"
+      );
+      Router.push("/");
+    } catch (error) {
+      errorNotify(error.code);
+    }
+  };
 
   return (
     <Layout>
       <div className="container mx-auto mt-10">
+        {/* Alertas por notificacion */}
+        <ToastContainer />
         <Heading titulo="Publica tu nota" />
         {/* Control y Validacion del formulario con formik y yup */}
         <Formik
           initialValues={crearNoticiaValues}
           validationSchema={crearNoticiaSchema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => crearNoticia(values)}
         >
-          <div>
-            <div className="flex justify-between mx-auto sm:flex-nowrap flex-wrap gap-12">
+          <Form className="mx-auto w-11/12 sm:w-full mt-12">
+            <div className="flex sm:justify-between mx-auto gap-1 sm:gap-12 flex-wrap sm:flex-nowrap">
+              {/* Formulario Izquierdo */}
               <div className="mx-auto w-11/12 sm:w-2/3">
-                <Form className="mt-12">
-                  <Field name="titulo" label="Titulo" />
-                  <Field name="cuerpo" label="Descripcion" />
-                  <RichTextBox />
-                  <Field name="fecha" label="Fecha del suceso" type="date" />
-                  <Select name="categoria" label="Categoria" />
-                </Form>
+                <Field name="titulo" label="Titulo" />
+                <RichTextBox label="Descripcion" />
+                <Field name="fecha" label="Fecha del suceso" type="date" />
+                <Select name="categoria" label="Categoria" />
               </div>
-              <div className="my-auto">
-                <div>
-                  <Image
-                    width={600}
-                    height={400}
-                    src={urlImagen}
-                    alt="imagen"
-                  />
-                </div>
-                <input
-                  type="file"
-                  className="curso-pointer block w-full text-sm text-slate-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-gray-400 file:text-white
-      file:duration-150
-      hover:file:bg-primary-red"
-                />
+              {/* Formulario derecho */}
+              <div className="mx-auto w-11/12 sm:w-1/3 self-center mb-6 sm:mb-0">
+                <FileInput urlImagen={urlImagen} setUrlImagen={setUrlImagen} />
               </div>
             </div>
 
-            {/* Aqui va a ir el mapita c: */}
+            {/* Mapa */}
+            <GoogleMap
+              address={address}
+              setAddress={setAddress}
+              mapCenter={mapCenter}
+              setMapCenter={setMapCenter}
+            />
 
             {/* Submit para enviar formulario */}
-            <GoogleMap />
             <ButtonForm value="Registrar" />
-          </div>
+          </Form>
         </Formik>
       </div>
     </Layout>

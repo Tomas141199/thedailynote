@@ -26,7 +26,7 @@ const Navbar = ({ inicio }) => {
   return (
     <>
       <div
-        className={`navbar ${inicio} ${stickyClass} h-20 flex items-center z-50`}
+        className={`navbar ${inicio} ${stickyClass} origin-bottom h-20 flex items-center z-50`}
       >
         <div className="flex-1 flex justify-around items-center">
           <Link href="/">

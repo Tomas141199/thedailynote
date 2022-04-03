@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["lh3.googleusercontent.com", "images-ext-2.discordapp.net"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "images-ext-2.discordapp.net",
+      "firebasestorage.googleapis.com",
+    ],
   },
 };
 

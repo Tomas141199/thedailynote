@@ -24,7 +24,7 @@ const Login = () => {
     if (notificacion) {
       infoNotify(notificacion.mensaje);
     }
-  }, []);
+  });
 
   //Funcion para que usuario inicie sesion con su cuenta de google
   const iniciarSesionConGoogle = () => {

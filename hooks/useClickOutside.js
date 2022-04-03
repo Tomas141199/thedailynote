@@ -11,7 +11,6 @@ const useClickOutside = () => {
   const handleClick = (event) => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
       setActiveClass(false);
-      console.log("diste click afuera", activeClass);
     }
   };
 

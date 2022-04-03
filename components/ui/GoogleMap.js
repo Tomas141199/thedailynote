@@ -6,13 +6,13 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import Field from "../Field";
 
-export const MapContainer = ({ google }) => {
-  const [address, setAddress] = useState("");
-  const [mapCenter, setMapCenter] = useState({
-    lat: 19.0043346,
-    lng: -98.20169539999999,
-  });
-
+export const MapContainer = ({
+  google,
+  address,
+  setAddress,
+  mapCenter,
+  setMapCenter,
+}) => {
   const handleChange = (address) => {
     setAddress(address);
   };
@@ -32,24 +32,28 @@ export const MapContainer = ({ google }) => {
   };
 
   return (
-    <div id="googleMaps" className="relative h-72 mb-8 overflow-y-hidden">
+    <div
+      id="googleMaps"
+      className="relative h-72 mb-8 w-11/12 mx-auto sm:w-full overflow-y-hidden"
+    >
       <PlacesAutocomplete
         value={address}
         onChange={(value) => handleChange(value)}
         onSelect={(value) => handleSelect(value)}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="relative">
+          <div className="relative w-full mt-4">
             <Field name="ubicacion" label="Ubicacion" {...getInputProps({})} />
-            <div className="autocomplete-dropdown-container absolute top-10 z-30 flex flex-col w-full bg-white rounded drop-shadow-lg">
+            <div className="autocomplete-dropdown-container absolute top-10 z-30 flex flex-col w-full bg-white rounded shadow-lg">
               {loading && <div>Loading...</div>}
               {suggestions.map((suggestion) => {
                 return (
                   <div
                     key={Math.random()}
                     {...getSuggestionItemProps(suggestion)}
+                    className="w-full"
                   >
-                    <span className="cursor-pointer">
+                    <span className="block cursor-pointer w-full hover:bg-slate-100 hover:font-bold">
                       {suggestion.description}
                     </span>
                   </div>
