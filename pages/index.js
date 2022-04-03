@@ -1,17 +1,32 @@
-import Navbar from "../components/ui/Navbar";
+import { useContext, useEffect } from "react";
+import AuthContext from "./../context/auth/authContext";
+import Layout from "./../components/Layout/Layout";
+import Hero from "./../components/Layout/Hero";
+import { ToastContainer } from "react-toastify";
+import NotificacionContext from "./../context/notificaciones/notificacionContext";
+import { infoNotify } from "../helpers/notify";
 
 export default function Home() {
-  return (
-    <div className="overflow-x-hidden">
-      <img
-        src="/images/hero.jpg"
-        className="w-screen height60 relative object-cover object-top"
-      />
-      <Navbar />
+  const { usuario } = useContext(AuthContext);
 
-      <div className="mt-6 text-2xl text-black text-center animate-bounce 1s infinity">
-        Hola
-      </div>
-    </div>
+  //Context de las notificaciones
+  const { notificacion } = useContext(NotificacionContext);
+
+  useEffect(() => {
+    if (notificacion) {
+      infoNotify(notificacion.mensaje);
+    }
+  });
+
+  return (
+    <Layout inicio={true}>
+      {/* Alertas por notificacion */}
+      <ToastContainer />
+      <Hero />
+      <h1 className="h-96">Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
+      <h1 className="h-96">Contenido de la pagina</h1>
+    </Layout>
   );
 }

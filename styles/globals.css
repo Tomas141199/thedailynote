@@ -38,12 +38,17 @@ body {
   @apply text-light-blue;
 }
 
-.height60 {
-  max-height: 60vh;
+.input-file {
+  @apply block w-full text-sm text-slate-500
+file:mr-4 file:py-2 file:px-4
+file:rounded-full file:border-0
+file:text-sm file:font-semibold
+file:bg-gray-400 file:text-white
+file:duration-150
+hover:file:bg-primary-red;
 }
 
 /* Background */
-
 .bg-mask,
 .bg-registro {
   background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
@@ -63,5 +68,64 @@ body {
     background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
       url("/images/registro-img.png");
     background-size: cover;
+  }
+}
+
+/* Burguer menu */
+
+.hamburguer .bar,
+.hamburguer:after,
+.hamburguer:before {
+  content: "";
+  @apply block w-full h-small bg-white rounded-full my-1 mx-0 duration-300;
+}
+
+.hamburguer.true .bar {
+  @apply opacity-0;
+}
+
+.hamburguer.true:after {
+  @apply rotate-45 -translate-x-1 -translate-y-04;
+}
+
+.hamburguer.true:before {
+  @apply -rotate-45 -translate-x-1 translate-y-2;
+}
+
+/* Active states */
+.arrow.true {
+  @apply rotate-180;
+}
+
+.dropdown.true {
+  @apply scale-100 top-10 -left-8;
+}
+
+.navbar.true {
+  @apply absolute w-full bg-opacity-blue top-0;
+}
+
+.navbar.false {
+  @apply bg-primary-blue;
+}
+
+.navbar.sticky {
+  @apply fixed top-0 w-full bg-primary-blue;
+  animation: stickyDown 0.5s ease-in-out;
+}
+
+.navbar-mobile.true {
+  @apply left-0;
+}
+
+/* Animations  */
+@keyframes stickyDown {
+  from {
+    transform-origin: bottom;
+    transform: translateY(-120px);
+  }
+
+  to {
+    transform: translateY(0);
   }
 }
