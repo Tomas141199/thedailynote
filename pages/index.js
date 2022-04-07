@@ -5,6 +5,8 @@ import Hero from "./../components/Layout/Hero";
 import { ToastContainer } from "react-toastify";
 import NotificacionContext from "./../context/notificaciones/notificacionContext";
 import { infoNotify } from "../helpers/notify";
+import Heading from "./../components/ui/Heading";
+import Link from "next/link";
 
 export default function Home() {
   const { usuario } = useContext(AuthContext);
@@ -23,10 +25,54 @@ export default function Home() {
       {/* Alertas por notificacion */}
       <ToastContainer />
       <Hero />
-      <h1 className="h-96">Contenido de la pagina</h1>
-      <h1 className="h-96">Contenido de la pagina</h1>
-      <h1 className="h-96">Contenido de la pagina</h1>
-      <h1 className="h-96">Contenido de la pagina</h1>
+      <div className="flex gap-2">
+        <div className="bg-white w-1/6 hidden sm:block px-2 py-4">
+          <Heading
+            titulo="Categorias"
+            className="text-lg after:bg-primary-red after:w-11/12"
+          />
+          <ul className="flex flex-col items-center gap-3 mt-4 font-semibold">
+            <li>
+              <Link href="/">
+                <a>Local</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a>Internacional</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a>Deportes</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a>Sociales</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a>Espectaculos</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a>Politica</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a>Comunidad BUAP</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="w-full sm:w-5/6 bg-slate-50 ">
+          <div className="h-96 text-center mt-12">Contenido de la pagina</div>
+        </div>
+      </div>
     </Layout>
   );
 }
