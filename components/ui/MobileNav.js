@@ -9,14 +9,45 @@ const MobileNav = ({ activeClass }) => {
         titulo="Categorias"
         className="text-white after:bg-primary-red text-lg after:w-11/12"
       />
+
       <Link href="#">
         <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
-          Link
+          Local
         </a>
       </Link>
       <Link href="#">
         <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
-          Link
+          Internacional
+        </a>
+      </Link>
+
+      <Link href="#">
+        <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
+          Deportes
+        </a>
+      </Link>
+
+      <Link href="#">
+        <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
+          Sociales
+        </a>
+      </Link>
+
+      <Link href="#">
+        <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
+          Espectaculos
+        </a>
+      </Link>
+
+      <Link href="#">
+        <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
+          Politica
+        </a>
+      </Link>
+
+      <Link href="#">
+        <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
+          Comunidad BUAP
         </a>
       </Link>
 
@@ -24,7 +55,7 @@ const MobileNav = ({ activeClass }) => {
         titulo="Perfil"
         className="text-white after:bg-primary-red text-lg mt-6 after:w-11/12"
       />
-      <Link href="#">
+      <Link href="/crear-noticia">
         <a className="text-white font-medium w-full relative duration-300 ease-linear z-50 after:absolute after:content-[''] after:-z-10 after:w-full after:h-full after:bg-light-blue after:rounded-r-full after:left-0 after:origin-left after:duration-300 after:ease-linear after:scale-x-0 after:hover:scale-100 hover:font-bold">
           Publicar
         </a>
