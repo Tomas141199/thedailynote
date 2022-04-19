@@ -38,19 +38,23 @@ const CrearNoticia = (values) => {
       return;
     }
 
+    const noticia = {
+      titulo: values.titulo,
+      descripcion: values.descripcion,
+      fecha: values.fecha,
+      categoria: values.categoria,
+      address,
+      mapCenter,
+      urlImagen,
+      createdAt: Date.now(),
+    };
+
     try {
-      fire.addNoticia({
-        ...values,
-        urlImagen,
-        address,
-        mapCenter,
-        createdAt: Date.now(),
-      });
+      fire.addNoticia(noticia);
       mostrarNotificacion(
         "Registro exitoso!, revisa tu correo para confirmar tu cuenta"
       );
 
-      Router.push("/");
       mostrarNotificacion(
         "Creacion exitosa!, tu publicacion esta pendiente de revision"
       );
