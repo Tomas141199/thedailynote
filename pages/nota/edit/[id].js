@@ -14,13 +14,13 @@ import fire from "../../../firebase";
 import Field from "./../../../components/Field";
 import errorNotify from "../../../helpers/notify";
 import Router from "next/router";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const EditarNoticia = ({ nota }) => {
   const [address, setAddress] = useState(nota.address);
   const [mapCenter, setMapCenter] = useState(nota.mapCenter);
-  const [urlImagen, setUrlImagen] = useState(
-    nota.urlImagen ?? "/images/placeholder.jpg"
-  );
+  const [urlImagen, setUrlImagen] = useState(nota.urlImagen);
   const { mostrarNotificacion } = useContext(NotificacionContext);
 
   const guardarCambios = (values) => {
@@ -34,19 +34,52 @@ const EditarNoticia = ({ nota }) => {
       return;
     }
 
+    const noticia = {
+      titulo: values.titulo,
+      descripcion: values.descripcion,
+      fecha: values.fecha,
+      categoria: values.categoria,
+      address,
+      mapCenter,
+      urlImagen,
+      createdAt: Date.now(),
+    };
+
     try {
-      fire.editNoticia(nota.id, {
-        ...values,
-        urlImagen,
-        address,
-        mapCenter,
-      });
+      fire.editNoticia(nota.id, noticia);
       Router.push("/");
       mostrarNotificacion(
         "Nuevos cambios, los cambios se guardaron correctamente"
       );
     } catch (error) {
       errorNotify(error);
+    }
+  };
+
+  const mostrarAlerta = () => {
+    confirmAlert({
+      title: "Eliminar Noticia",
+      message: "¿Esta seguro de hacer esto?",
+      buttons: [
+        {
+          label: "Si",
+          onClick: () => eliminarNoticia(),
+        },
+        {
+          label: "Cancelar",
+          onClick: () => alert("Click No"),
+        },
+      ],
+    });
+  };
+
+  const eliminarNoticia = async () => {
+    try {
+      await fire.delNoticia(nota.id);
+      Router.push("/");
+      mostrarNotificacion("Noticia eliminada, la nota se borro correctamente");
+    } catch (e) {
+      errorNotify("Algo salio mal...");
     }
   };
 
@@ -61,8 +94,8 @@ const EditarNoticia = ({ nota }) => {
           initialValues={{
             titulo: nota.titulo ?? "",
             descripcion: nota.descripcion ?? "",
-            fecha: nota.fecha,
-            categoria: nota.categoria,
+            fecha: nota.fecha ?? "",
+            categoria: nota.categoria ?? "",
           }}
           enableReinitialize={true}
           validationSchema={crearNoticiaSchema}
@@ -92,7 +125,16 @@ const EditarNoticia = ({ nota }) => {
             />
 
             {/* Submit para enviar formulario */}
-            <ButtonForm value="Guardar" />
+            <div className="flex justify-end items-center gap-3">
+              <ButtonForm value="Guardar" />
+              <button
+                type="button"
+                onClick={() => mostrarAlerta()}
+                className="p-2 w-full sm:w-24 font-semibold text-white bg-red-600 rounded cursor-pointer ease-in-out duration-300 hover:scale-105 hover:drop-shadow-lg hover:bg-red-200 mb-6"
+              >
+                Eliminar
+              </button>
+            </div>
           </Form>
         </Formik>
       </div>

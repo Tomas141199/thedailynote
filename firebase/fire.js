@@ -12,6 +12,7 @@ import {
   doc,
   setDoc,
   getDoc,
+  deleteDoc,
 } from "firebase/firestore";
 class Fire {
   constructor() {
@@ -36,9 +37,7 @@ class Fire {
   async editNoticia(id, noticia) {
     //Obtencion de la base de datos
     const db = getFirestore();
-    await setDoc(doc(db, "Noticias", id), {
-      noticia,
-    });
+    await setDoc(doc(db, "Noticias", id), noticia);
   }
 
   async getNoticia(id) {
@@ -50,6 +49,10 @@ class Fire {
     } else {
       return null;
     }
+  }
+
+  async delNoticia(id) {
+    await deleteDoc(doc(this.db, "Noticias", id));
   }
 }
 
