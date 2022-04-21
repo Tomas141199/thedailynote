@@ -13,6 +13,9 @@ import {
   setDoc,
   getDoc,
   deleteDoc,
+  where,
+  query,
+  getDocs
 } from "firebase/firestore";
 class Fire {
   constructor() {
@@ -38,6 +41,18 @@ class Fire {
     //Obtencion de la base de datos
     const db = getFirestore();
     await setDoc(doc(db, "Noticias", id), noticia);
+  }
+
+  async getNoticias()
+  {
+    const db = getFirestore();
+    const coleccion = query(collection(db, "Noticias"));
+    const docs = await getDocs(coleccion);
+    const noticias = [];
+    docs.forEach((doc) => {
+      noticias.push(doc.data());
+    })
+    return noticias;
   }
 
   async getNoticia(id) {

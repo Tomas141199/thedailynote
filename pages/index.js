@@ -7,6 +7,8 @@ import NotificacionContext from "./../context/notificaciones/notificacionContext
 import { infoNotify } from "../helpers/notify";
 import Heading from "./../components/ui/Heading";
 import Link from "next/link";
+import { GridNoticias } from "../components/Layout/GridNoticias";
+import fire from "../firebase";
 
 export default function Home() {
   const { usuario } = useContext(AuthContext);
@@ -70,9 +72,20 @@ export default function Home() {
           </ul>
         </div>
         <div className="w-full sm:w-5/6 bg-slate-50 ">
-          <div className="h-96 text-center mt-12">Contenido de la pagina</div>
+          <div className="h-96 text-center mt-12">
+            <GridNoticias/>
+          </div>
         </div>
       </div>
     </Layout>
   );
 }
+
+// export async function getServerSideProps() {
+//   const notas = await fire.getNoticias();
+//   return {
+//     props: {
+//       notas,
+//     },
+//   };
+// }
