@@ -10,7 +10,7 @@ import Link from "next/link";
 import { GridNoticias } from "../components/Layout/GridNoticias";
 import fire from "../firebase";
 
-export default function Home() {
+export default function Home({ notas }) {
   const { usuario } = useContext(AuthContext);
 
   //Context de las notificaciones
@@ -73,7 +73,7 @@ export default function Home() {
         </div>
         <div className="w-full sm:w-5/6 bg-slate-50 ">
           <div className="h-full text-center mt-12">
-            <GridNoticias/>
+            <GridNoticias noticias={notas} />
           </div>
         </div>
       </div>
@@ -81,11 +81,11 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps() {
-//   const notas = await fire.getNoticias();
-//   return {
-//     props: {
-//       notas,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  const notas = await fire.getNoticias();
+  return {
+    props: {
+      notas,
+    },
+  };
+}
