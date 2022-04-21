@@ -1,6 +1,7 @@
-
+import Image from "next/image";
 import {  useEffect,useState } from "react";
 import fire from "../../firebase";
+import NoticiaCard from "./NoticiaCard";
 
 export const GridNoticias = () => {
 
@@ -16,14 +17,19 @@ export const GridNoticias = () => {
     }
     
   return (
-    <div>GridNoticias
-    
+    <>
+    <p>Noticias</p>
+    <div className="flex flex-wrap gap-6">
     {
-        Noticias.map(noticia => {
-            console.log(noticia.titulo);
-        })
+        Noticias.map(noticia => (
+            <NoticiaCard
+                key={noticia.createdAt}
+                {...noticia}
+            />
+        ))
     }
     </div>
+    </>
   )
 };
 

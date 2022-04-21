@@ -72,7 +72,7 @@ export default function Home() {
           </ul>
         </div>
         <div className="w-full sm:w-5/6 bg-slate-50 ">
-          <div className="h-96 text-center mt-12">
+          <div className="h-full text-center mt-12">
             <GridNoticias/>
           </div>
         </div>
