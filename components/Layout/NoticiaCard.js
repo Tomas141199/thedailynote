@@ -13,7 +13,7 @@ const NoticiaCard = ({
   urlImagen,
 }) => {
   return (
-    <div className="inline-block max-w-sm rounded bg-white h-full  shadow-xl mt-6  hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
+    <div className="inline-block h85 rounded bg-white ml-8  shadow-xl mt-6  hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
       <button>
         <img
           className="w-auto mt-6 mx-auto"
@@ -21,15 +21,15 @@ const NoticiaCard = ({
           alt="Sunset in the mountains"
         />
       </button>
-      <div className="flex justify-between justify-items-center ">
-        <p className="mt-4 mx-8 text-l font-bold">
+      <div className="flex justify-between justify-items-center content-center ">
+        <p className="m-2 mx-2 font-bold">
           Hace:{" "}
           <span className="font-normal text-slate-500">
             {formatDistanceToNow(new Date(createdAt), { locale: es })}
           </span>
         </p>
         <div>
-          <button className="m-4 ">
+          <button className="mx-4">
             <Image
               blurDataURL="/images/logo-movil.svg"
               src="/images/compartir.png"
@@ -38,7 +38,7 @@ const NoticiaCard = ({
               alt="logo"
             />
           </button>
-          <button className="m-4">
+          <button className="mx-4">
             <Image
               blurDataURL="/images/logo-movil.svg"
               src="/images/heart.png"
