@@ -118,6 +118,10 @@ hover:file:bg-primary-red;
   @apply left-0;
 }
 
+.h85{
+  width: 21rem;
+}
+
 /* Animations  */
 @keyframes stickyDown {
   from {
