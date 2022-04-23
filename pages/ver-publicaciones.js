@@ -28,10 +28,10 @@ function ver_publicaciones() {
                     </div>
                     <div className='gap-5'>
                         <div className='mx-4'>
-                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300 mb-6 mx-2">Recientes</button>
-                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300 mb-6 mx-2">Todas</button>
-                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300 mb-6 mx-2">Aprobadas</button>
-                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300 mb-6 mx-2">Por revisar</button>
+                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300  hover:scale-105 hover:drop-shadow-lg hover:bg-blue-200 mb-6 mx-2">Recientes</button>
+                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300  hover:scale-105 hover:drop-shadow-lg hover:bg-blue-200 mb-6 mx-2">Todas</button>
+                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300  hover:scale-105 hover:drop-shadow-lg hover:bg-blue-200 mb-6 mx-2">Aprobadas</button>
+                            <button className="p-2 w-full sm:w-24 font-semibold text-white bg-primary-blue rounded-md cursor-pointer ease-in-out duration-300  hover:scale-105 hover:drop-shadow-lg hover:bg-blue-200 mb-6 mx-2">Por revisar</button>
                         </div>
                     </div>
                 </div>
