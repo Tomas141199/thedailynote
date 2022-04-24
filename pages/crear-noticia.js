@@ -17,8 +17,12 @@ import { ToastContainer } from "react-toastify";
 import fire from "./../firebase/fire";
 import Router from "next/router";
 import NotificacionContext from "./../context/notificaciones/notificacionContext";
+import UserCard from "../components/ui/UserCard";
+import AuthContext from "../context/auth/authContext";
 
 const CrearNoticia = (values) => {
+
+  const { usuario } = useContext(AuthContext);
   const { mostrarNotificacion } = useContext(NotificacionContext);
   const [address, setAddress] = useState("");
   const [mapCenter, setMapCenter] = useState({
@@ -39,6 +43,7 @@ const CrearNoticia = (values) => {
     }
 
     const noticia = {
+      id: usuario.id,
       titulo: values.titulo,
       descripcion: values.descripcion,
       fecha: values.fecha,

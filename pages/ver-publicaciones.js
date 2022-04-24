@@ -5,11 +5,14 @@ import { GridNoticias } from "../components/Layout/GridNoticias";
 import fire from "../firebase";
 import AuthContext from '../context/auth/authContext';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { FireContext } from '../firebase';
 
 function ver_publicaciones() {
 
-    const [user, setUser] = useState();
-    console.log(user);
+
+    //Obtención del id de cada publicacion 
+
 
     return (
         <Layout>
@@ -35,7 +38,7 @@ function ver_publicaciones() {
                         </div>
                     </div>
                 </div>
-                {/**Aqui va la petición */}
+                {/**Aqui va la petición y la nueva card */}
 
             </div>
         </Layout>
