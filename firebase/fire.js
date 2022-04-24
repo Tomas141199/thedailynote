@@ -15,7 +15,7 @@ import {
   deleteDoc,
   where,
   query,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 class Fire {
   constructor() {
@@ -33,7 +33,7 @@ class Fire {
     try {
       const docRef = await addDoc(collection(db, "Noticias"), noticia);
     } catch (e) {
-      //Error
+      throw e;
     }
   }
 
@@ -43,15 +43,14 @@ class Fire {
     await setDoc(doc(db, "Noticias", id), noticia);
   }
 
-  async getNoticias()
-  {
+  async getNoticias() {
     const db = getFirestore();
     const coleccion = query(collection(db, "Noticias"));
     const docs = await getDocs(coleccion);
     const noticias = [];
     docs.forEach((doc) => {
       noticias.push(doc.data());
-    })
+    });
     return noticias;
   }
 
