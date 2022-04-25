@@ -3,16 +3,47 @@ import Layout from '../components/Layout/Layout'
 import Heading from '../components/ui/Heading'
 import { GridNoticias } from "../components/Layout/GridNoticias";
 import fire from "../firebase";
-import AuthContext from '../context/auth/authContext';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FireContext } from '../firebase';
+import AuthContext from "../context/auth/authContext";
 
-function ver_publicaciones() {
+import Image from "next/image";
 
+const ver_publicaciones = () => {
 
-    //Obtención del id de cada publicacion 
+    //Guardar las noticias por usuario 
+    const [noticias, guardarNoticias] = useState([]);
 
+    //Jalamos el ID del usuario
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+
+        //Funcion para obtener las publicaciones 
+        const obtenerPublicaciones = async () => {
+            //Aplicamos un where para que se muestren las puras notas que tengan el mismo id del usuario que está logeado
+            const q = query(collection(fire.db, "noticias"), where("id", "==", user.uid));
+
+            //Snapshot
+            const querySnapshot = await getDocs(q);
+            manejarSnapShot(querySnapshot);
+        };
+        //llamado a la funcion
+        obtenerPublicaciones();
+    }, []);
+
+    //Devolucion del query
+    function manejarSnapShot(querySnapshot) {
+        const notas = querySnapshot.docs.map((doc) => {
+            return {
+                id: doc.id,
+                ...doc.data(),
+            };
+        });
+        //Almacena las notas
+        guardarNoticias(notas);
+    }
 
     return (
         <Layout>
@@ -39,10 +70,51 @@ function ver_publicaciones() {
                     </div>
                 </div>
                 {/**Aqui va la petición y la nueva card */}
+                <div className="inline-block h85 rounded bg-white ml-8  shadow-xl mt-6  hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
+                    {/*<!-- card -->*/}
+                    <div className="mx-auto flex w-96 flex-col justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60">
+                        {/*<!-- img -->*/}
+                        <img className="aspect-video w-96 rounded-t-2xl object-cover object-center" src="https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                        {/*<!-- text info -->*/}
+                        <div className="p-4">
+
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between justify-items-center content-center ">
+                        <p className="m-2 mx-2 font-bold">
+                            Hace:{" "}
+                            <span className="font-normal text-slate-500">
+
+                            </span>
+                        </p>
+                        <div>
+                            <button className="mx-4">
+                                <Image
+                                    blurDataURL="/images/logo-movil.svg"
+                                    src="/images/compartir.png"
+                                    width={30}
+                                    height={35}
+                                    alt="logo"
+                                />
+                            </button>
+                            <button className="mx-4">
+                                <Image
+                                    blurDataURL="/images/logo-movil.svg"
+                                    src="/images/heart.png"
+                                    width={30}
+                                    height={30}
+                                    alt="logo"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </Layout>
+
     );
-}
+};
 
 export default ver_publicaciones
