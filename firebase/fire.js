@@ -16,6 +16,7 @@ import {
   where,
   query,
   getDocs,
+  onSnapshot,
 } from "firebase/firestore";
 class Fire {
   constructor() {
@@ -54,6 +55,22 @@ class Fire {
     return noticias;
   }
 
+  async getNoticiasByUserId(id) {
+    //Aplicamos un where para que se muestren las puras notas que tengan el mismo id del usuario que está logeado
+    const q = query(
+      collection(fire.db, "Noticias"),
+      where("creador.id", "==", id)
+    );
+    //Snapshot
+    console.log("Query: ", id);
+    try {
+      const querySnapshot = await getDocs(q);
+      return this.manejarSnapShot(querySnapshot);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async getNoticia(id) {
     const db = getFirestore();
     const docRef = doc(db, "Noticias", id);
@@ -67,6 +84,17 @@ class Fire {
 
   async delNoticia(id) {
     await deleteDoc(doc(this.db, "Noticias", id));
+  }
+
+  //Devolucion del query
+  manejarSnapShot(querySnapshot) {
+    const notas = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    return notas;
   }
 }
 
