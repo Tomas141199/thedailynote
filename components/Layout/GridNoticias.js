@@ -9,6 +9,7 @@ export const GridNoticias = ({ noticias }) => {
         </h1>
         <div className="flex flex-wrap gap-6">
           {noticias.map((noticia) => (
+
             <NoticiaCard key={noticia.createdAt} {...noticia} />
           ))}
         </div>

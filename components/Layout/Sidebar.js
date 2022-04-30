@@ -10,7 +10,7 @@ const Sidebar = () => {
       />
       <ul className="flex flex-col items-center gap-3 mt-4 font-semibold">
         <li>
-          <Link href="/">
+          <Link href="/Categories/Local">
             <a>Local</a>
           </Link>
         </li>

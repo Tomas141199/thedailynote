@@ -82,6 +82,120 @@ class Fire {
     }
   }
 
+  //Querys para la obtención de las notas segun su categoria 
+
+  //Local 
+  async getNoticiaLocal() {
+    //Generamos el query 
+    const l = query(collection(fire.db, "Noticias"), where("categoria", "==", "Local"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(l);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  //Internacional
+  async getNoticiaInternacional() {
+    //Generamos el query 
+    const i = query(collection(fire.db, "Noticias"), where("categoria", "==", "Internacional"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(i);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  //Deportes
+  async getNoticiaDeportes() {
+    //Generamos el query 
+    const d = query(collection(fire.db, "Noticias"), where("categoria", "==", "Deportes"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(d);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  //Sociales
+  async getNoticiaSociales() {
+    //Generamos el query 
+    const s = query(collection(fire.db, "Noticias"), where("categoria", "==", "Sociales"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(s);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  //Espectaculos 
+  async getNoticiaEspectaculos() {
+    //Generamos el query 
+    const esp = query(collection(fire.db, "Noticias"), where("categoria", "==", "Espectaculos"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(esp);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  //Politica 
+  async getNoticiaPolitica() {
+    //Generamos el query 
+    const p = query(collection(fire.db, "Noticias"), where("categoria", "==", "Politica"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(p);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  //Comunidad BUAP 
+  async getNoticiaBuap() {
+    //Generamos el query 
+    const b = query(collection(fire.db, "Noticias"), where("categoria", "==", "Comunidad BUAP"));
+
+    //Aplicamos try catch
+    try {
+      //Generamos el snapshot
+      const QuerySnap = await getDocs(b);
+      return this.manejarSnapShot(QuerySnap);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
   async delNoticia(id) {
     await deleteDoc(doc(this.db, "Noticias", id));
   }

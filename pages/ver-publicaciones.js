@@ -1,5 +1,6 @@
 import Layout from "../components/Layout/Layout";
 import Heading from "../components/ui/Heading";
+import { GridNoticiasHover } from "../components/Layout/GridNoticiasHover";
 import { GridNoticias } from "../components/Layout/GridNoticias";
 import fire from "../firebase";
 
@@ -55,7 +56,7 @@ const Publicaciones = ({ noticias }) => {
                 </div>
                 <div>
                     {/* Aqui va la card */}
-                    <GridNoticias noticias={noticias} />
+                    <GridNoticiasHover noticias={noticias} />
                 </div>
             </div>
         </Layout>

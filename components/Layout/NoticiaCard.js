@@ -13,7 +13,8 @@ const NoticiaCard = ({
   urlImagen,
 }) => {
   return (
-    <div className="inline-block h85 rounded bg-white ml-8  shadow-xl mt-6  hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
+
+    <div className=" group inline-block h85 rounded bg-white ml-8 shadow-xl mt-6 shadow-lg container hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
       <button>
         <img
           className="w-auto mt-6 mx-auto"
@@ -21,7 +22,17 @@ const NoticiaCard = ({
           alt="Sunset in the mountains"
         />
       </button>
-      <div className="flex justify-between justify-items-center content-center ">
+
+      <div className="flex justify-between justify-items-center content-center">
+
+        <p className="m-2 mx-2 font-bold">
+          {titulo}
+        </p>
+
+        <p className="m-2 mx-2 font-bold">
+          {categoria}
+        </p>
+
         <p className="m-2 mx-2 font-bold">
           Hace:{" "}
           <span className="font-normal text-slate-500">
@@ -49,7 +60,9 @@ const NoticiaCard = ({
           </button>
         </div>
       </div>
+
     </div>
+
   );
 };
 
