@@ -51,6 +51,11 @@ const UserCard = ({ usuario }) => {
               <Link href="/crear-noticia">Publicar</Link>
             </li>
             <li className="transition hover:bg-slate-100 hover:rounded-2xl">
+              <Link href={`/ver-publicaciones?id=${usuario.uid}`}>
+                Publicaciones
+              </Link>
+            </li>
+            <li className="transition hover:bg-slate-100 hover:rounded-2xl">
               <button onClick={() => logOut()}>Salir</button>
             </li>
           </ul>

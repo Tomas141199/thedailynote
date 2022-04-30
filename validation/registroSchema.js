@@ -23,3 +23,5 @@ const registroValues = {
 export { registroValues };
 
 export default registroSchema;
+
+
