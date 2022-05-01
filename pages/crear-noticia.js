@@ -17,8 +17,10 @@ import { ToastContainer } from "react-toastify";
 import fire from "./../firebase/fire";
 import Router from "next/router";
 import NotificacionContext from "./../context/notificaciones/notificacionContext";
+import AuthContext from "../context/auth/authContext";
 
 const CrearNoticia = (values) => {
+  const { usuario } = useContext(AuthContext);
   const { mostrarNotificacion } = useContext(NotificacionContext);
   const [address, setAddress] = useState("");
   const [mapCenter, setMapCenter] = useState({
@@ -39,6 +41,10 @@ const CrearNoticia = (values) => {
     }
 
     const noticia = {
+      creador: {
+        id: usuario.uid,
+        nombre: usuario.displayName,
+      },
       titulo: values.titulo,
       descripcion: values.descripcion,
       fecha: values.fecha,
@@ -52,10 +58,6 @@ const CrearNoticia = (values) => {
     try {
       fire.addNoticia(noticia);
       mostrarNotificacion(
-        "Registro exitoso!, revisa tu correo para confirmar tu cuenta"
-      );
-
-      mostrarNotificacion(
         "Creacion exitosa!, tu publicacion esta pendiente de revision"
       );
       Router.push("/");
@@ -65,7 +67,7 @@ const CrearNoticia = (values) => {
   };
 
   return (
-    <Layout>
+    <Layout categorias={values.categorias}>
       <div className="container mx-auto mt-10">
         {/* Alertas por notificacion */}
         <ToastContainer />
@@ -107,5 +109,15 @@ const CrearNoticia = (values) => {
     </Layout>
   );
 };
+
+export async function getServerSideProps() {
+  const categorias = await fire.getCategorias();
+
+  return {
+    props: {
+      categorias,
+    },
+  };
+}
 
 export default CrearNoticia;

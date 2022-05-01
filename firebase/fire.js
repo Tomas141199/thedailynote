@@ -15,7 +15,7 @@ import {
   deleteDoc,
   where,
   query,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 class Fire {
   constructor() {
@@ -33,7 +33,7 @@ class Fire {
     try {
       const docRef = await addDoc(collection(db, "Noticias"), noticia);
     } catch (e) {
-      //Error
+      throw e;
     }
   }
 
@@ -43,15 +43,24 @@ class Fire {
     await setDoc(doc(db, "Noticias", id), noticia);
   }
 
-  async getNoticias()
-  {
+  async getNoticias(categoria) {
     const db = getFirestore();
-    const coleccion = query(collection(db, "Noticias"));
-    const docs = await getDocs(coleccion);
+    let q;
+
+    if (categoria) {
+      q = query(
+        collection(db, "Noticias"),
+        where("categoria", "==", categoria)
+      );
+    } else {
+      q = query(collection(db, "Noticias"));
+    }
+
+    const docs = await getDocs(q);
     const noticias = [];
     docs.forEach((doc) => {
       noticias.push(doc.data());
-    })
+    });
     return noticias;
   }
 
@@ -66,8 +75,68 @@ class Fire {
     }
   }
 
+  //Query para la obtención de las notas segun su categoria
+  async getNoticiaByCategoria(categoria = null) {
+    if (categoria) {
+      const q = query(
+        collection(fire.db, "Noticias"),
+        where("categoria", "==", categoria)
+      );
+      try {
+        const QuerySnap = await getDocs(q);
+        return this.manejarSnapShot(QuerySnap);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      this.getNoticia();
+    }
+  }
+
+  async getCategorias() {
+    const db = getFirestore();
+    const coleccion = query(collection(db, "Categorias"));
+    const docs = await getDocs(coleccion);
+    const categorias = [];
+    docs.forEach((doc) => {
+      categorias.push(doc.data());
+    });
+    return categorias;
+  }
+
+  async getNoticiasByUserIdCategorica(id, categoria = null) {
+    //Aplicamos un where para que se muestren las puras notas que tengan el mismo id del usuario que está logeado
+    let q;
+    if (categoria) {
+      q = query(
+        collection(fire.db, "Noticias"),
+        where("creador.id", "==", id),
+        where("categoria", "==", categoria)
+      );
+    } else {
+      q = query(collection(fire.db, "Noticias"), where("creador.id", "==", id));
+    }
+    try {
+      const querySnapshot = await getDocs(q);
+      return this.manejarSnapShot(querySnapshot);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async delNoticia(id) {
     await deleteDoc(doc(this.db, "Noticias", id));
+  }
+
+  //Devolucion del query
+  manejarSnapShot(querySnapshot) {
+    const notas = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    return notas;
   }
 }
 

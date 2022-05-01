@@ -6,7 +6,7 @@ import DesktopNav from "./DesktopNav";
 import useClickOutside from "./../../hooks/useClickOutside";
 import MobileNav from "./MobileNav";
 
-const Navbar = ({ inicio }) => {
+const Navbar = ({ inicio, categorias }) => {
   const { usuario } = useContext(AuthContext);
   const { activeClass, wrapperRef, toggleClass } = useClickOutside();
   const [stickyClass, setStickyClass] = useState("");
@@ -53,7 +53,7 @@ const Navbar = ({ inicio }) => {
           </button>
         </div>
       </div>
-      <MobileNav activeClass={activeClass} />
+      <MobileNav activeClass={activeClass} categorias={categorias} />
     </>
   );
 };

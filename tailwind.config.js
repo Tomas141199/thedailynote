@@ -10,6 +10,7 @@ module.exports = {
       },
       colors: {
         "opacity-blue": "#090b0da2 ",
+        "opacity-light-blue": "#0597f2a2",
         "primary-blue": "#090B0D",
         "light-blue": "#0597F2",
         "primary-red": "#F9250F",

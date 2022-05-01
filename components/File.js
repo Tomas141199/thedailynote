@@ -83,7 +83,7 @@ const FileInput = ({ urlImagen, setUrlImagen }) => {
         <div className="mt-2 w-24 mx-auto flex flex-center gap-2 items-center">
           <Circle
             percent={upload}
-            strokeWidth="4"
+            strokeWidth={4}
             trailColor="#9CA3AF"
             strokeColor="#0597F2"
             className="w-10"

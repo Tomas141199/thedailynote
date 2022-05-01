@@ -27,7 +27,6 @@ body {
 }
 
 /* Input Styling */
-
 .floating-input > input::placeholder {
   color: transparent;
 }
@@ -38,15 +37,11 @@ body {
   @apply text-light-blue;
 }
 
+/*
 .input-file {
-  @apply block w-full text-sm text-slate-500
-file:mr-4 file:py-2 file:px-4
-file:rounded-full file:border-0
-file:text-sm file:font-semibold
-file:bg-gray-400 file:text-white
-file:duration-150
-hover:file:bg-primary-red;
+  @apply block w-full text-sm text-slate-500 file: mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-400 file:text-white file:duration-150 hover:file:bg-primary-red;
 }
+*/
 
 /* Background */
 .bg-mask,
@@ -72,7 +67,6 @@ hover:file:bg-primary-red;
 }
 
 /* Burguer menu */
-
 .hamburguer .bar,
 .hamburguer:after,
 .hamburguer:before {
@@ -118,10 +112,6 @@ hover:file:bg-primary-red;
   @apply left-0;
 }
 
-.h85{
-  width: 21rem;
-}
-
 /* Animations  */
 @keyframes stickyDown {
   from {
@@ -132,4 +122,61 @@ hover:file:bg-primary-red;
   to {
     transform: translateY(0);
   }
+}
+
+/*CardHover*/
+.content-div:hover {
+  background-color: #5e5d61;
+}
+
+.image-cover {
+  height: 260px;
+}
+
+/*
+-remove the classes below if you have the 'group-hover'property added in your tailwind config file
+-also remove the class from the html template
+*/
+.content-div:hover .fd-cl {
+  opacity: 0.25;
+}
+
+.content-div:hover .fd-sh {
+  opacity: 1;
+}
+
+.link-categoria {
+  @apply block
+   text-slate-900
+    font-normal
+    w-full
+    relative
+    duration-300
+    ease-linear
+    z-50
+    after:absolute
+    after:content-['']
+    after:-z-10
+    after:w-full
+    after:h-full 
+    after:bg-primary-blue 
+    after:left-0 after:origin-bottom 
+    after:duration-300 
+    after:ease-linear
+    after:scale-y-0
+    after:hover:scale-100
+    hover:text-white
+    hover:font-semibold
+    before:absolute
+    before:content-['']
+    before:w-full
+    before:h-full
+    before:bg-primary-red
+    before:-z-10
+    before:scale-y-0
+    before:hover:scale-y-100
+    before:origin-top
+    before:hover:-top-1 
+    before:hover:-left-1
+    before:duration-300;
 }
