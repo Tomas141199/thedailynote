@@ -27,13 +27,12 @@ body {
 }
 
 /* Input Styling */
-
-.floating-input>input::placeholder {
+.floating-input > input::placeholder {
   color: transparent;
 }
 
-.floating-input>input:focus~label,
-.floating-input>input:not(:placeholder-shown)~label {
+.floating-input > input:focus ~ label,
+.floating-input > input:not(:placeholder-shown) ~ label {
   @apply opacity-75 scale-75 -translate-y-8 -translate-x-2;
   @apply text-light-blue;
 }
@@ -68,7 +67,6 @@ body {
 }
 
 /* Burguer menu */
-
 .hamburguer .bar,
 .hamburguer:after,
 .hamburguer:before {
@@ -114,10 +112,6 @@ body {
   @apply left-0;
 }
 
-.h85 {
-  width: 21rem;
-}
-
 /* Animations  */
 @keyframes stickyDown {
   from {
@@ -131,7 +125,6 @@ body {
 }
 
 /*CardHover*/
-
 .content-div:hover {
   background-color: #5e5d61;
 }
@@ -150,4 +143,40 @@ body {
 
 .content-div:hover .fd-sh {
   opacity: 1;
+}
+
+.link-categoria {
+  @apply block
+   text-slate-900
+    font-normal
+    w-full
+    relative
+    duration-300
+    ease-linear
+    z-50
+    after:absolute
+    after:content-['']
+    after:-z-10
+    after:w-full
+    after:h-full 
+    after:bg-primary-blue 
+    after:left-0 after:origin-bottom 
+    after:duration-300 
+    after:ease-linear
+    after:scale-y-0
+    after:hover:scale-100
+    hover:text-white
+    hover:font-semibold
+    before:absolute
+    before:content-['']
+    before:w-full
+    before:h-full
+    before:bg-primary-red
+    before:-z-10
+    before:scale-y-0
+    before:hover:scale-y-100
+    before:origin-top
+    before:hover:-top-1 
+    before:hover:-left-1
+    before:duration-300;
 }

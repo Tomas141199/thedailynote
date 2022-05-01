@@ -13,27 +13,20 @@ const NoticiaCard = ({
   urlImagen,
 }) => {
   return (
+    <div className="rounded-t bg-white shadow-xl mt-6 hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
+      <div
+        className="h-40 w-full bg-cover bg-center rounded-t"
+        style={{
+          backgroundImage: `url(${urlImagen})`,
+        }}
+      ></div>
 
-    <div className=" group inline-block h85 rounded bg-white ml-8 shadow-xl mt-6 shadow-lg container hover:scale-105 transition duration-700 hover:shadow-blue-500/50">
-      <button>
-        <img
-          className="w-auto mt-6 mx-auto"
-          src={urlImagen}
-          alt="Sunset in the mountains"
-        />
-      </button>
+      <h2 className="font-semibold text-left mx-2 mt-4 text-lg leading-normal">
+        {titulo}
+      </h2>
 
-      <div className="flex justify-between justify-items-center content-center">
-
-        <p className="m-2 mx-2 font-bold">
-          {titulo}
-        </p>
-
-        <p className="m-2 mx-2 font-bold">
-          {categoria}
-        </p>
-
-        <p className="m-2 mx-2 font-bold">
+      <div className="flex py-2 justify-between justify-items-center items-center">
+        <p className="m-2 text-sm mx-2 font-bold">
           Hace:{" "}
           <span className="font-normal text-slate-500">
             {formatDistanceToNow(new Date(createdAt), { locale: es })}
@@ -60,9 +53,7 @@ const NoticiaCard = ({
           </button>
         </div>
       </div>
-
     </div>
-
   );
 };
 

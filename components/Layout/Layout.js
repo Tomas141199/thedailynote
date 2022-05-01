@@ -1,9 +1,9 @@
 import Navbar from "./../ui/Navbar";
 
-const Layout = ({ inicio = false, children }) => {
+const Layout = ({ inicio = false, children, categorias }) => {
   return (
     <>
-      <Navbar inicio={inicio} />
+      <Navbar inicio={inicio} categorias={categorias} />
       {/* Aqui va todo el contenido de las paginas */}
       <div>{children}</div>
     </>

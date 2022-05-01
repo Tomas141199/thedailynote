@@ -2,81 +2,71 @@ import Image from "next/image";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
 
-const NoticiaCardHover = ({
-    address,
-    categoria,
-    createdAt,
-    descripcion,
-    fecha,
-    mapCenter,
-    titulo,
-    urlImagen,
-}) => {
-    return (
-        <div className="relative group container inline-block h85 rounded bg-white ml-8 shadow-xl mt-6 shadow-lg content-div">
-            {/* Div para la imagen */}
-            <div>
-                <div className="fd-cl group-hover:opacity-25">
-                    <button>
-                        <img
-                            className="w-auto mt-6 mx-auto"
-                            src={urlImagen}
-                            alt="Sunset in the mountains"
-                        />
-                    </button>
-                </div>
-
-                {/* Div de los botones y la información */}
-                <div className="flex justify-between justify-items-center content-center group-hover:opacity-25">
-
-                    <p className="m-2 mx-2 font-bold">
-                        {titulo}
-                    </p>
-
-                    <p className="m-2 mx-2 font-bold">
-                        Hace:{" "}
-                        <span className="font-normal text-slate-500">
-                            {formatDistanceToNow(new Date(createdAt), { locale: es })}
-                        </span>
-                    </p>
-                </div>
-
-                <div className="absolute left-8 top-2 ml-16 mt-24 mr-8 opacity-0 fd-sh group-hover:opacity-100">
-                    <div className="text-center">
-                        <button className="text-center ml-4 rounded-full p-4 bg-white ">
-                            <Image
-                                blurDataURL="/images/logo-movil.svg"
-                                src="/images/editar.png"
-                                width={30}
-                                height={35}
-                                alt="logo"
-                            />
-                        </button>
-
-                        <button className="text-center ml-4 rounded-full p-4 bg-white ">
-                            <Image
-                                blurDataURL="/images/logo-movil.svg"
-                                src="/images/delete.png"
-                                width={30}
-                                height={35}
-                                alt="logo"
-                            />
-                        </button>
-
-                    </div>
-                </div>
-            </div>
+const NoticiaCardHover = ({ createdAt, titulo, urlImagen }) => {
+  return (
+    <div className="rounded-t bg-white shadow-xl mt-6  transition duration-700 hover:shadow-blue-500/50">
+      <div
+        className="relative h-40 w-full bg-cover bg-center rounded-t"
+        style={{
+          backgroundImage: `url(${urlImagen})`,
+        }}
+      >
+        <div className="h-full w-full flex items-center justify-center gap-8 bg-opacity-blue opacity-0 duration-300 ease-linear hover:opacity-100">
+          <button className="bg-opacity-light-blue rounded-full w-10 h-10 flex items-center duration-300 justify-center hover:rotate-45 hover:scale-110">
+            <Image
+              blurDataURL="/images/logo-movil.svg"
+              src="/images/trash-can.png"
+              width={24}
+              height={24}
+              alt="logo"
+            />
+          </button>
+          <button className="bg-opacity-light-blue rounded-full w-10 h-10 flex items-center duration-300 justify-center hover:rotate-180 hover:scale-110">
+            <Image
+              blurDataURL="/images/logo-movil.svg"
+              src="/images/eye.png"
+              width={24}
+              height={24}
+              alt="logo"
+            />
+          </button>
         </div>
-    );
+      </div>
+
+      <h2 className="font-semibold text-left mx-2 mt-4 text-lg leading-normal">
+        {titulo}
+      </h2>
+
+      <div className="flex py-2 justify-between justify-items-center items-center">
+        <p className="m-2 text-sm mx-2 font-bold">
+          Hace:{" "}
+          <span className="font-normal text-slate-500">
+            {formatDistanceToNow(new Date(createdAt), { locale: es })}
+          </span>
+        </p>
+        <div>
+          <button className="mx-4">
+            <Image
+              blurDataURL="/images/logo-movil.svg"
+              src="/images/compartir.png"
+              width={30}
+              height={35}
+              alt="logo"
+            />
+          </button>
+          <button className="mx-4">
+            <Image
+              blurDataURL="/images/logo-movil.svg"
+              src="/images/heart.png"
+              width={30}
+              height={30}
+              alt="logo"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-
 export default NoticiaCardHover;
-
-
-
-
-
-
-
-

@@ -1,49 +1,17 @@
-import Link from "next/link";
+import Categoria from "../ui/Categorias";
 import Heading from "../ui/Heading";
 
-const Sidebar = () => {
+const Sidebar = ({ categorias }) => {
   return (
-    <div className="bg-white w-1/6 hidden sm:block px-2 py-4">
+    <div className="bg-white w-1/6 hidden md:block px-2 py-4">
       <Heading
         titulo="Categorias"
         className="text-lg after:bg-primary-red after:w-11/12"
       />
-      <ul className="flex flex-col items-center gap-3 mt-4 font-semibold">
-        <li>
-          <Link href="/Categories/Local">
-            <a>Local</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>Internacional</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>Deportes</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>Sociales</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>Espectaculos</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>Politica</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <a>Comunidad BUAP</a>
-          </Link>
-        </li>
+      <ul className="ml-1 flex flex-col items-start gap-3 mt-4 font-semibold">
+        {categorias.map((categoria) => (
+          <Categoria key={Math.random()} categoria={categoria} />
+        ))}
       </ul>
     </div>
   );

@@ -8,7 +8,7 @@ import { GridNoticias } from "../components/Layout/GridNoticias";
 import fire from "../firebase";
 import Sidebar from "../components/Layout/Sidebar";
 
-export default function Home({ notas }) {
+export default function Home({ notas, categorias }) {
   //Context de las notificaciones
   const { notificacion } = useContext(NotificacionContext);
 
@@ -19,23 +19,25 @@ export default function Home({ notas }) {
   });
 
   return (
-    <Layout inicio={true}>
+    <Layout inicio={true} categorias={categorias}>
       {/* Alertas por notificacion */}
       <ToastContainer />
       <Hero />
-      <div className="flex gap-2">
-        <Sidebar />
+      <div className="flex gap-2 bg-slate-50 ">
+        <Sidebar categorias={categorias} />
         <GridNoticias noticias={notas} />
       </div>
     </Layout>
   );
 }
 
-export async function getServerSideProps() {
-  const notas = await fire.getNoticias();
+export async function getServerSideProps({ query: { categoria } }) {
+  const notas = await fire.getNoticias(categoria);
+  const categorias = await fire.getCategorias();
   return {
     props: {
       notas,
+      categorias,
     },
   };
 }
