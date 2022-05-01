@@ -17,7 +17,6 @@ import { ToastContainer } from "react-toastify";
 import fire from "./../firebase/fire";
 import Router from "next/router";
 import NotificacionContext from "./../context/notificaciones/notificacionContext";
-import UserCard from "../components/ui/UserCard";
 import AuthContext from "../context/auth/authContext";
 
 const CrearNoticia = (values) => {
@@ -68,7 +67,7 @@ const CrearNoticia = (values) => {
   };
 
   return (
-    <Layout>
+    <Layout categorias={values.categorias}>
       <div className="container mx-auto mt-10">
         {/* Alertas por notificacion */}
         <ToastContainer />
@@ -110,5 +109,15 @@ const CrearNoticia = (values) => {
     </Layout>
   );
 };
+
+export async function getServerSideProps() {
+  const categorias = await fire.getCategorias();
+
+  return {
+    props: {
+      categorias,
+    },
+  };
+}
 
 export default CrearNoticia;

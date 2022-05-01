@@ -17,7 +17,7 @@ import Router from "next/router";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-const EditarNoticia = ({ nota }) => {
+const EditarNoticia = ({ nota, categorias }) => {
   const [address, setAddress] = useState(nota.address);
   const [mapCenter, setMapCenter] = useState(nota.mapCenter);
   const [urlImagen, setUrlImagen] = useState(nota.urlImagen);
@@ -84,7 +84,7 @@ const EditarNoticia = ({ nota }) => {
   };
 
   return (
-    <Layout>
+    <Layout categorias={categorias}>
       <div className="container mx-auto mt-10">
         {/* Alertas por notificacion */}
         <ToastContainer />
@@ -144,10 +144,12 @@ const EditarNoticia = ({ nota }) => {
 
 export async function getServerSideProps({ query: { id } }) {
   const nota = await fire.getNoticia(id);
+  const categorias = await fire.getCategorias();
   nota.id = id;
   return {
     props: {
       nota,
+      categorias,
     },
   };
 }
