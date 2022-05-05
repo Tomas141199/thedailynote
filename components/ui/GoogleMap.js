@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import PlacesAutocomplete, {
   geocodeByAddress,

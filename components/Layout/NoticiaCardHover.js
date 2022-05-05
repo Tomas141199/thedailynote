@@ -1,8 +1,45 @@
 import Image from "next/image";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { es } from "date-fns/locale";
+import Link from "next/link";
+import { confirmAlert } from "react-confirm-alert";
+import Router from "next/router";
+import fire from "../../firebase";
+import NotificacionContext from "./../../context/notificaciones/notificacionContext";
+import { errorNotify } from "./../../helpers/notify";
+import { useContext } from "react";
 
-const NoticiaCardHover = ({ createdAt, titulo, urlImagen }) => {
+const NoticiaCardHover = ({ id, createdAt, titulo, urlImagen, votos }) => {
+  const { mostrarNotificacion } = useContext(NotificacionContext);
+  const mostrarAlerta = () => {
+    confirmAlert({
+      title: "Eliminar Noticia",
+      message: "¿Esta seguro de hacer esto?",
+      buttons: [
+        {
+          label: "Si",
+          onClick: () => eliminarNoticia(),
+        },
+        {
+          label: "Cancelar",
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    });
+  };
+
+  const eliminarNoticia = async () => {
+    try {
+      await fire.delNoticia(id);
+      Router.push("/");
+      mostrarNotificacion("Noticia eliminada, la nota se borro correctamente");
+    } catch (e) {
+      errorNotify("Algo salio mal...");
+    }
+  };
+
   return (
     <div className="rounded-t bg-white shadow-xl mt-6  transition duration-700 hover:shadow-blue-500/50">
       <div
@@ -12,7 +49,10 @@ const NoticiaCardHover = ({ createdAt, titulo, urlImagen }) => {
         }}
       >
         <div className="h-full w-full flex items-center justify-center gap-8 bg-opacity-blue opacity-0 duration-300 ease-linear hover:opacity-100">
-          <button className="bg-opacity-light-blue rounded-full w-10 h-10 flex items-center duration-300 justify-center hover:rotate-45 hover:scale-110">
+          <button
+            onClick={() => mostrarAlerta()}
+            className="bg-opacity-light-blue rounded-full w-10 h-10 flex items-center duration-300 justify-center hover:rotate-45 hover:scale-110"
+          >
             <Image
               blurDataURL="/images/logo-movil.svg"
               src="/images/trash-can.png"
@@ -21,15 +61,17 @@ const NoticiaCardHover = ({ createdAt, titulo, urlImagen }) => {
               alt="logo"
             />
           </button>
-          <button className="bg-opacity-light-blue rounded-full w-10 h-10 flex items-center duration-300 justify-center hover:rotate-180 hover:scale-110">
-            <Image
-              blurDataURL="/images/logo-movil.svg"
-              src="/images/eye.png"
-              width={24}
-              height={24}
-              alt="logo"
-            />
-          </button>
+          <Link passHref={true} href={`/nota/edit/${id}`}>
+            <button className="bg-opacity-light-blue rounded-full w-10 h-10 flex items-center duration-300 justify-center hover:rotate-180 hover:scale-110">
+              <Image
+                blurDataURL="/images/logo-movil.svg"
+                src="/images/eye.png"
+                width={24}
+                height={24}
+                alt="logo"
+              />
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -45,16 +87,7 @@ const NoticiaCardHover = ({ createdAt, titulo, urlImagen }) => {
           </span>
         </p>
         <div>
-          <button className="mx-4">
-            <Image
-              blurDataURL="/images/logo-movil.svg"
-              src="/images/compartir.png"
-              width={30}
-              height={35}
-              alt="logo"
-            />
-          </button>
-          <button className="mx-4">
+          <button className="flex items-center gap-1 mx-4">
             <Image
               blurDataURL="/images/logo-movil.svg"
               src="/images/heart.png"
@@ -62,6 +95,7 @@ const NoticiaCardHover = ({ createdAt, titulo, urlImagen }) => {
               height={30}
               alt="logo"
             />
+            {votos}
           </button>
         </div>
       </div>

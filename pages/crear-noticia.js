@@ -52,13 +52,16 @@ const CrearNoticia = (values) => {
       address,
       mapCenter,
       urlImagen,
+      comentarios: [],
+      haVotado: [],
+      votos: 0,
       createdAt: Date.now(),
     };
 
     try {
       fire.addNoticia(noticia);
       mostrarNotificacion(
-        "Creacion exitosa!, tu publicacion esta pendiente de revision"
+        "Creacion exitosa!, tu publicacion ya se en cuentra en el inicio"
       );
       Router.push("/");
     } catch (error) {

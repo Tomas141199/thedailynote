@@ -40,7 +40,7 @@ class Fire {
   async editNoticia(id, noticia) {
     //Obtencion de la base de datos
     const db = getFirestore();
-    await setDoc(doc(db, "Noticias", id), noticia);
+    await setDoc(doc(db, "Noticias", id), noticia, { merge: true });
   }
 
   async getNoticias(categoria) {
@@ -59,7 +59,7 @@ class Fire {
     const docs = await getDocs(q);
     const noticias = [];
     docs.forEach((doc) => {
-      noticias.push(doc.data());
+      noticias.push({ id: doc.id, ...doc.data() });
     });
     return noticias;
   }
@@ -68,8 +68,9 @@ class Fire {
     const db = getFirestore();
     const docRef = doc(db, "Noticias", id);
     const docSnap = await getDoc(docRef);
+    console.log("id", id);
     if (docSnap.exists()) {
-      return docSnap.data();
+      return { id: docSnap.id, ...docSnap.data() };
     } else {
       return null;
     }

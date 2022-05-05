@@ -13,7 +13,7 @@ const Publicaciones = ({ noticias, categorias }) => {
         />
 
         <div className="flex justify-center items-center mt-6 flex-wrap md:flex-nowrap">
-          <form className="relative w-full">
+          {/* <form className="relative w-full">
             <input
               type="text"
               placeholder="Buscar nota"
@@ -39,8 +39,8 @@ const Publicaciones = ({ noticias, categorias }) => {
                 ></path>
               </svg>
             </button>
-          </form>
-          <div className="flex items-center mt-6 md:mt-0">
+          </form> */}
+          {/* <div className="flex items-center mt-6 md:mt-0">
             <button className="p-2 font-semibold text-white bg-primary-blue rounded-full cursor-pointer ease-in-out duration-300  hover:scale-105 hover:drop-shadow-lg hover:bg-blue-200 mx-2">
               Recientes
             </button>
@@ -53,7 +53,7 @@ const Publicaciones = ({ noticias, categorias }) => {
             <button className="p-2 font-semibold text-white bg-primary-blue rounded-full cursor-pointer ease-in-out duration-300  hover:scale-105 hover:drop-shadow-lg hover:bg-blue-200 mx-2">
               Pendientes
             </button>
-          </div>
+          </div> */}
         </div>
         <div>
           {/* Aqui va la card */}

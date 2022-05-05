@@ -6,10 +6,12 @@ const DesktopNav = ({ usuario }) => {
     <nav className="hidden sm:block">
       <ul className="flex justify-between items-center gap-4 text-sm text-white">
         <li className="relative after:absolute after:w-full after:h-middle after:bg-light-blue after:left-0 after:top-link after:scale-x-0 after:origin-left after:duration-500 hover:after:scale-x-100">
-          <Link href="#">¿Quíen somos?</Link>
+          <Link href="/sobre-nosotros">¿Quíen somos?</Link>
         </li>
         <li className="relative after:absolute after:w-full after:h-middle after:bg-light-blue after:left-0 after:top-link after:scale-x-0 after:origin-left after:duration-500 hover:after:scale-x-100">
-          <Link href="#">Contacto</Link>
+          <Link href="https://chat.whatsapp.com/Lk4KH3zQunoEzPklZzXUeg">
+            Contacto
+          </Link>
         </li>
         {!usuario ? (
           <>
