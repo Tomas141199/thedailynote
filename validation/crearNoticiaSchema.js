@@ -6,7 +6,7 @@ export const crearNoticiaSchema = () => {
     descripcion: Yup.string()
       .required("El cuerpo de la noticia es obligatorio")
       .min(50, "Almenos 50 caracteres")
-      .max(1200, "El limite es de 500 caracteres"),
+      .max(5000, "El limite es de 1200 caracteres"),
     fecha: Yup.date().required("La fecha es obligatoria"),
     categoria: Yup.string().required("La categoria es obligatoria"),
   });

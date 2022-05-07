@@ -6,7 +6,11 @@ const Comentario = ({ comentario }) => {
     <div className="py-2 flex gap-3 items-center">
       <div
         className="h-12 w-12 rounded-full bg-cover"
-        style={{ backgroundImage: `url(${comentario.photo})` }}
+        style={{
+          backgroundImage: `url(${
+            comentario.photo ? comentario.photo : "/images/usericon.png"
+          })`,
+        }}
       ></div>
       <div className="">
         <div className="font-bold text-primary-blue">{comentario.nombre}</div>

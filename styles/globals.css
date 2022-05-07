@@ -47,21 +47,21 @@ body {
 .bg-mask,
 .bg-registro {
   background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
-    url("/images/login-bg1.jpg");
+    url("/images/login-bg1.webp");
   background-size: cover;
 }
 
 @media (min-width: 640px) {
   .bg-mask {
     background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
-      url("/images/login-bg3.jpg");
+      url("/images/login-bg3.webp");
     background-size: cover;
     background-position: center;
   }
 
   .bg-registro {
     background: linear-gradient(to right, rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.5)),
-      url("/images/registro-img.png");
+      url("/images/registro-img.webp");
     background-size: cover;
   }
 }
