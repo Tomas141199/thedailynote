@@ -23,7 +23,7 @@ export default function Home({ notas, categorias }) {
       {/* Alertas por notificacion */}
       <ToastContainer />
       <Hero />
-      <div className="flex gap-2 bg-slate-50 ">
+      <div>
         <Sidebar categorias={categorias} />
         <GridNoticias noticias={notas} />
       </div>

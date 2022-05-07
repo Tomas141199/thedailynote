@@ -32,13 +32,14 @@ const Login = () => {
       .then((result) => {
         //Arroja el token de acceso a la cuenta, esto es para acceder a la API de google
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        // La informacion del usuario logueado
-        const user = result.user;
         const token = credential.accessToken;
 
-        //Guarda la sesion del usuario
-        localStorage.setItem("usuario", JSON.stringify(user));
-
+        // La informacion del usuario logueado
+        const user = result.user;
+        setTimeout(() => {
+          //Cambio del estado
+          Router.push("/");
+        }, 2000);
         //Regresar al usuario al inicio de la pagina
         Router.push("/");
       })
@@ -59,7 +60,6 @@ const Login = () => {
 
         //Verifica que el correo se ha verificado
         if (user.emailVerified) {
-          localStorage.setItem("usuario", JSON.stringify(user));
           //Regresar al usuario al inicio de la pagina
           Router.push("/");
         } else {

@@ -2,16 +2,13 @@ import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function useAuth() {
-  const [usuarioAutenticado, guardarUsuarioAutenticado] = useState(null);
+  const [usuarioAutenticado, guardarUsuarioAutenticado] = useState({});
   const auth = getAuth();
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        guardarUsuarioAutenticado(user);
-      }
+      user ? guardarUsuarioAutenticado(user) : guardarUsuarioAutenticado(null);
     });
     return unsuscribe;
-    //eslint-disable-next-line
   }, []);
 
   return usuarioAutenticado;

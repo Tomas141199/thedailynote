@@ -16,8 +16,10 @@ import errorNotify from "../../../helpers/notify";
 import Router from "next/router";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import AuthContext from "./../../../context/auth/authContext";
 
 const EditarNoticia = ({ nota, categorias }) => {
+  const { usuario } = useContext(AuthContext);
   const [address, setAddress] = useState(nota.address);
   const [mapCenter, setMapCenter] = useState(nota.mapCenter);
   const [urlImagen, setUrlImagen] = useState(nota.urlImagen);
@@ -42,7 +44,6 @@ const EditarNoticia = ({ nota, categorias }) => {
       address,
       mapCenter,
       urlImagen,
-      createdAt: Date.now(),
     };
 
     try {
@@ -145,7 +146,6 @@ const EditarNoticia = ({ nota, categorias }) => {
 export async function getServerSideProps({ query: { id } }) {
   const nota = await fire.getNoticia(id);
   const categorias = await fire.getCategorias();
-  nota.id = id;
   return {
     props: {
       nota,
